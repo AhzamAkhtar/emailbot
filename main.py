@@ -10,7 +10,7 @@ def talk(text):
 def get_info():
     try:
         with sr.Microphone() as source:
-            print("listening...")
+            print("Im Listning ......")
             voice=listener.listen(source)
             info=listener.recognize_google(voice)
             print(info)
@@ -27,7 +27,6 @@ def send_email(receiver,subject,message):
     email["Subject"] = subject
     email.set_content(message)
     server.send_message(email)
-    talk("done,your email has been delvered sucessfully")
     """server.sendmail("tt9615842@gmail.com",
                     "itsmotionarticles@gmail.com",
                     "please use "
@@ -48,4 +47,9 @@ def get_email_info():
     talk("Tell me the message in your email")
     message=get_info()
     send_email(receiver, subject, message)
+    talk("your message has been delivered sucessfully")
+    talk("do you want to send more emails")
+    send_more=get_info()
+    if "yes" in send_more:
+        get_email_info()
 get_email_info()
